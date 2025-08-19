@@ -1,36 +1,19 @@
-# Laravel ポートフォリオ（Laravel + Inertia.js + React）
+## 権限調整
+chmod -R 777 ./src/portfolio/storage ./src/portfolio/bootstrap/cache
 
-## 環境
-- OS: Ubuntu（WSL / Linux）
-- Laravel Sail（Dockerベース）
-- スターターキット: Laravel Breeze + Inertia.js + React
+## 初期構築
+.env.exampleから.envを作成
 
----
+docker exec -it portfolio bash
+composer install
+npm install
+php artisan migrate
 
-## 1. 今回行った構築手順（初回セットアップ記録）
 
-### 1-1. プロジェクト作成
-下記コマンドを実行
-curl -s "https://laravel.build/portfolio" | bash
 
-### 1-2. Laravel Sail の起動
-cd /home/Docker/portfolio
-./vendor/bin/sail up -d
-※port衝突のためdocker-compose.ymlを173 → 5174 に変更
 
-### 1-3. パーミッション変更
-パーミッションエラーのため下記コマンドを実行
-file_put_contents(/var/www/html/storage/framework/views/bae129cef9e600352d1c88ca55b5c61c.php): Failed to open stream: Permission denied
-コマンド
-./vendor/bin/sail exec laravel.test bash -c "chmod -R 775 storage bootstrap/cache && chown -R sail:sail storage bootstrap/cache"
 
-### 1-4. マイグレーション作成・実行
-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'laravel.sessions' doesn't exist (Connection: mysql, SQL: select * from sessions where id = 3un7gNK7DwM3SM0uGCH3NHBcBAvzhmzAztQBcPed limit 1)
-コマンド
-./vendor/bin/sail artisan session:table
-./vendor/bin/sail artisan migrate
-
-### 1-5. Laravel Breeze（Inertia + React版）のインストール
+## About Laravel
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
