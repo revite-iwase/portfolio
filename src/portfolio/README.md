@@ -9,8 +9,9 @@ composer install
 npm install
 php artisan migrate
 
-
-
+## 初期構築
+npm run dev -- --host
+localhost:8401にアクセス
 
 
 ## About Laravel
