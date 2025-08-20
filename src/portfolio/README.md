@@ -14,6 +14,28 @@ npm run dev -- --host
 localhost:8401にアクセス
 
 
+## HMR ホストの設定（.env）
+Vite の HMR が `localhost` 固定だとリモート端末や別ホストからのアクセスで WebSocket が繋がらない場合があります。
+
+`vite.config.js` で `.env` の `VITE_HMR_HOST` を参照するようにしているため、環境に合わせて設定してください。
+
+例）ホストOSからアクセスする（Docker 内で開発）の場合:
+
+```
+# src/portfolio/.env に追加
+VITE_HMR_HOST=host.docker.internal
+```
+
+例）LAN 内の別端末からアクセスさせたい場合:
+
+```
+VITE_HMR_HOST=あなたの開発マシンのLAN IP（例: 192.168.1.10）
+```
+
+補足:
+- Vite のホストバインドは `npm run dev -- --host` で有効にしてください（READMEの手順の通り）。
+- ポートは既定で 5173 を利用しています（`docker-compose.yml` で公開済み）。
+
 ## About Laravel
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
